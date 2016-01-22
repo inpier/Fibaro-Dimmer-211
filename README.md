@@ -8,6 +8,7 @@ It's not the most elegant solution but it works (for me anyway so use at your ow
 Having changed Parameter 14 to 1 i.e.Toggle Switch I found that after a short while the switch stopped working. I read somewhere that this was an issue with the 211 and that Parameter 10 should be set to 0 to solve this problem so I set it to 0 and it seems to have sorted it.
 
 Method for anyone needing help to set this up.
+
 Log in to the Developers website and click My Device Handlers. 
 Click +New Device Handler then select  the From Code option.
 Copy the Device type code and paste it into your New Device Handler then click Create then Save and Publish for me.
