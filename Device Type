@@ -106,7 +106,7 @@ def updated() {
         zwave.configurationV1.configurationSet(configurationValue: [1], parameterNumber: 11, size: 1).format(),
         zwave.configurationV1.configurationSet(configurationValue: [99], parameterNumber: 12, size: 1).format(),
         zwave.configurationV1.configurationSet(configurationValue: [2], parameterNumber: 13, size: 1).format(),
-        zwave.configurationV1.configurationSet(configurationValue: [1], parameterNumber: 14, size: 1).format(),
+        zwave.configurationV1.configurationSet(configurationValue: [0], parameterNumber: 14, size: 1).format(),
         zwave.configurationV1.configurationSet(configurationValue: [1], parameterNumber: 15, size: 1).format(),
         zwave.configurationV1.configurationSet(configurationValue: [1], parameterNumber: 16, size: 1).format(),
         zwave.configurationV1.configurationSet(configurationValue: [0], parameterNumber: 17, size: 1).format(),
