@@ -12,7 +12,7 @@
  */
 
 metadata {
-	definition (name: "Fibaro Dimmer 211 params UK", namespace: "smartthings", author: "inpier") {
+	definition (name: "Fibaro Dimmer 211 params UK", namespace: "inpier", author: "inpier") {
 		capability "Actuator"
 		capability "Switch"		
 		capability "Polling"
