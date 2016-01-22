@@ -1,7 +1,7 @@
 # Fibaro-Dimmer-211
 SmartThings Device type for Fibaro Dimmer 211.
 
-I have final cobbled together a device type handler for the Fibaro Dimmer 211 which includes the ability to change the parameters. I have struggled trying to change parameters on this unit and could not find any code that actually worked. So I set about creating something that would.
+I have finally cobbled together a device type handler for the Fibaro Dimmer 211 which includes the ability to change the parameters. I have struggled trying to change parameters on this unit and could not find any code that actually worked. So I set about creating something that would.
 It's not the most elegant solution but it works (for me anyway so use at your own risk). But once you have the parameters set  up exactly as you want them you can revert back to your previous DTH if you prefer as the 211 unit should retain it's settings.
 
 ****Word of Warning****
