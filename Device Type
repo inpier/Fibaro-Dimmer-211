@@ -84,7 +84,7 @@ metadata {
 **************  Change the Parameter configurationValue[] in the code below to  the value         **************
 **************  you want.(Refer to manual for defaults and valid values). Then Save your changes  ************** 
 **************  and Publish For Me. Then open SmartThings App and select your device.             ************** 
-**************  Click 3 dots top right(Android app) & Edit Device then click Done. This triggers  **************
+**************  Click Gear Wheel top right(Android app) & Edit Device then click Done. This triggers  **************
 **************  the Update. If you want to confirm  the parameter change then monitor             **************
 **************  Live Logging on developers web site and click Configure in the SmarthThings App.  **************
 *************   this will give you a report of each of the device's parameters and its current    **************
