@@ -10,7 +10,29 @@
  *  for the specific language governing permissions and limitations under the License.
  *
  */
+ 
+preferences {
+        input(name: "attr1", type: "enum", title: "Activate/deactivate ALL ON/OFF functions", defaultValue: "255", options: ["255","0","1","2"])
+        input(name: "attr6", type: "enum", title: "Sending commands to control devices assigned to 1-st association group", options: ["0","1","2"])
+        input(name: "attr7", type: "enum", title: "Checking the device status before sending a control frame from key no.2", options: ["0","1"])
+        input(name: "attr8", type: "number", title: "Percentage of a dimming step at automatic control", defaultValue: "1", range: "1..99")
+        input(name: "attr9", type: "number", title: "Time of manually moving the Dimmer between the extreme dimming values (ms)", defaultValue: "5", range: "1..255")
+        input(name: "attr10", type: "number", title: "Time of automatic moving the dimmer between extreme dimming values", defaultValue: "1", range: "0..255")
+        input title: "", description: "NOTE: value 0 is required for inductive and capacitive devices unsuitable for dimming (e.g. fluorescent lamps, motors, etc.)", displayDuringSetup: false, type: "paragraph", element: "paragraph"
 
+        input(name: "attr11", type: "number", title: "percentage of a dimming step at manual control", defaultValue: "1", range: "1..99")
+        input(name: "attr12", type: "number", title: "Maximum Dimmer level control", defaultValue: "99", range: "2..99")
+        input(name: "attr13", type: "number", title: "Minimum Dimmer level control", defaultValue: "2", range: "1..98")
+        input(name: "attr14", type: "enum", title: "Switch type", defaultValue: "0", options: ["0","1","2"])
+        input(name: "attr15", type: "enum", title: "Double click option (set lighting at 100%)", defaultValue: "1", options: ["0","1"])
+        input(name: "attr16", type: "enum", title: "Save Dimmer state after power failure", defaultValue: "1", options: ["0","1"])
+        input(name: "attr17", type: "enum", title: "Function of 3-way switch", defaultValue: "0", options: ["0","1"])
+        input(name: "attr18", type: "enum", title: "Synchronizing Light level for associated devices", defaultValue: "0", options: ["0","1"])
+        input(name: "attr19", type: "enum", title: "Bi-Stable key function", defaultValue: "0", options: ["0","1"])
+        input(name: "attr20", type: "number", title: "Impulse Length", defaultValue: "110", range: "100..170")
+
+        
+}
 metadata {
 	definition (name: "Fibaro Dimmer 211 params UK", namespace: "inpier", author: "inpier") {
 		capability "Actuator"
@@ -97,22 +119,22 @@ metadata {
 def updated() {
 	return response([
 			delayBetween([
-        zwave.configurationV1.configurationSet(configurationValue: [255], parameterNumber: 1, size: 1).format(),
-        zwave.configurationV1.configurationSet(configurationValue: [0], parameterNumber: 6, size: 1).format(),
-        zwave.configurationV1.configurationSet(configurationValue: [1], parameterNumber: 7, size: 1).format(),
-        zwave.configurationV1.configurationSet(configurationValue: [1], parameterNumber: 8, size: 1).format(),
-        zwave.configurationV1.configurationSet(configurationValue: [5], parameterNumber: 9, size: 1).format(),
-        zwave.configurationV1.configurationSet(configurationValue: [1], parameterNumber: 10, size: 1).format(),
-        zwave.configurationV1.configurationSet(configurationValue: [1], parameterNumber: 11, size: 1).format(),
-        zwave.configurationV1.configurationSet(configurationValue: [99], parameterNumber: 12, size: 1).format(),
-        zwave.configurationV1.configurationSet(configurationValue: [2], parameterNumber: 13, size: 1).format(),
-        zwave.configurationV1.configurationSet(configurationValue: [0], parameterNumber: 14, size: 1).format(),
-        zwave.configurationV1.configurationSet(configurationValue: [1], parameterNumber: 15, size: 1).format(),
-        zwave.configurationV1.configurationSet(configurationValue: [1], parameterNumber: 16, size: 1).format(),
-        zwave.configurationV1.configurationSet(configurationValue: [0], parameterNumber: 17, size: 1).format(),
-		zwave.configurationV1.configurationSet(configurationValue: [0], parameterNumber: 18, size: 1).format(),
-        zwave.configurationV1.configurationSet(configurationValue: [0], parameterNumber: 19, size: 1).format(),
-        zwave.configurationV1.configurationSet(configurationValue: [110], parameterNumber: 20, size: 1).format()
+        zwave.configurationV1.configurationSet(configurationValue: [attr1], parameterNumber: 1, size: 1).format(),
+        zwave.configurationV1.configurationSet(configurationValue: [attr6], parameterNumber: 6, size: 1).format(),
+        zwave.configurationV1.configurationSet(configurationValue: [attr7], parameterNumber: 7, size: 1).format(),
+        zwave.configurationV1.configurationSet(configurationValue: [attr8], parameterNumber: 8, size: 1).format(),
+        zwave.configurationV1.configurationSet(configurationValue: [attr9], parameterNumber: 9, size: 1).format(),
+        zwave.configurationV1.configurationSet(configurationValue: [attr10], parameterNumber: 10, size: 1).format(),
+        zwave.configurationV1.configurationSet(configurationValue: [attr11], parameterNumber: 11, size: 1).format(),
+        zwave.configurationV1.configurationSet(configurationValue: [attr12], parameterNumber: 12, size: 1).format(),
+        zwave.configurationV1.configurationSet(configurationValue: [attr13], parameterNumber: 13, size: 1).format(),
+        zwave.configurationV1.configurationSet(configurationValue: [attr14], parameterNumber: 14, size: 1).format(),
+        zwave.configurationV1.configurationSet(configurationValue: [attr15], parameterNumber: 15, size: 1).format(),
+        zwave.configurationV1.configurationSet(configurationValue: [attr16], parameterNumber: 16, size: 1).format(),
+        zwave.configurationV1.configurationSet(configurationValue: [attr17], parameterNumber: 17, size: 1).format(),
+		zwave.configurationV1.configurationSet(configurationValue: [attr18], parameterNumber: 18, size: 1).format(),
+        zwave.configurationV1.configurationSet(configurationValue: [attr19], parameterNumber: 19, size: 1).format(),
+        zwave.configurationV1.configurationSet(configurationValue: [attr20], parameterNumber: 20, size: 1).format()
 ], 1000)
 		])
 }
@@ -259,5 +281,3 @@ def configure() {
 	log.debug "Reading Device Parameters  of ${device.displayName}..."
     listCurrentParams();
 }
- 
- 
