@@ -50,7 +50,7 @@ preferences {
         input title: "ADVANCED FUNCTION", displayDuringSetup: false, type: "paragraph", element: "paragraph"
 		input(name: "attr20", type: "number", title: "(20)Impulse Length", defaultValue: "110", range: "100..170")
         input title: "", description: "default value 101 for 60Hz or 110 for 50Hz", displayDuringSetup: false, type: "paragraph", element: "paragraph"
-		input title: "", description: "This function will enable decreasing the minimum level of the Dimmer by extending the control impulse. By changing the minimum level, the user may completely dim LED bulbs. Not all LED bulbs available on the market have the dimming option., displayDuringSetup: false, type: "paragraph", element: "paragraph"
+		input title: "", description: "This function will enable decreasing the minimum level of the Dimmer by extending the control impulse. By changing the minimum level, the user may completely dim LED bulbs. Not all LED bulbs available on the market have the dimming option.", displayDuringSetup: false, type: "paragraph", element: "paragraph"
 		input title: "WARNING!", displayDuringSetup: false, type: "paragraph", element: "paragraph"
 		input title: "", description: "Wrong setting of the function may cause incorrect operation of the Dimmer.", displayDuringSetup: false, type: "paragraph", element: "paragraph"
 
