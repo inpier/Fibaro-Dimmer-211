@@ -10,7 +10,50 @@
  *  for the specific language governing permissions and limitations under the License.
  *
  */
+ 
+preferences {
+        input(name: "attr1", type: "enum", title: "(1)Activate/deactivate ALL ON/OFF functions", defaultValue: "255", options: [255: "ALL ON active, ALL OFF active",0:"ALL ON is not active ALL OFF is not active",1:" ALL ON is not active ALL OFF active",2:"ALL ON active ALL OFF is not active"])
+        
+		input(name: "attr6", type: "enum", title: "(6)Sending commands to control devices assigned to 1-st association group",  defaultValue: "0", options: [0: "commands are sent when device is turned on and off",1: "commands are sent when device is turned off. Enabling device does not send control commands. Double-clicking key sends 'turn on' command, dimmers memorize the last saved state (e.g. 50% brightness).",2: "commands are sent when device is turned off. Enabling device does not send control commands. Double-clicking key sends 'turn on' command and dimmers are set to 100% brightness."])
+		input title: "", description: "NOTE: Parameter 15 value must be set to 1 to work properly. This activates the double-click functionality - dimmer/roller shutter control. ", displayDuringSetup: false, type: "paragraph", element: "paragraph"
+        
+		input(name: "attr7", type: "enum", title: "(7)Checking the device status before sending a control frame from key no.2", defaultValue: "1",  options: [0: "Not checked",1: "Checked"])
+        input title: "", description: "Info: Key no. 2 is not represented by any physical device expect of devices on association list. This functionality prevents of lack of reaction on pressing key no. 2 through polling devices from association list one by one and checking thier actual states.", displayDuringSetup: false, type: "paragraph", element: "paragraph"
+     
+		input(name: "attr8", type: "number", title: "(8)Percentage of a dimming step at automatic control", defaultValue: "1", range: "1..99")
+        
+		input(name: "attr9", type: "number", title: "(9)Time of manually moving the Dimmer between the extreme dimming values (ms)", defaultValue: "5", range: "1..255")
+        
+		input(name: "attr10", type: "number", title: "(10)Time of automatically moving the dimmer between extreme dimming values", defaultValue: "1", range: "0..255")
+        input title: "", description: "NOTE: value 0 is required for inductive and capacitive devices unsuitable for dimming (e.g. fluorescent lamps, motors, etc.)", displayDuringSetup: false, type: "paragraph", element: "paragraph"
 
+        input(name: "attr11", type: "number", title: "(11)percentage of a dimming step at manual control", defaultValue: "1", range: "1..99")
+        
+		input(name: "attr12", type: "number", title: "(12)Maximum Dimmer level control", defaultValue: "99", range: "2..99")
+		input(name: "attr13", type: "number", title: "(13)Minimum Dimmer level control", defaultValue: "2", range: "1..98")
+        
+		input(name: "attr14", type: "enum", title: "(14)Switch type connector", defaultValue: "0", options: [0: "mono-stable (retractive)",1: "bi-stable (toggle)"])
+        
+		input(name: "attr15", type: "enum", title: "(15)Double click option (set lighting at 100%)", defaultValue: "1", options: [0: "Disabled",1: "Enabled"])
+        
+		input(name: "attr16", type: "enum", title: "(16)Save Dimmer state after power failure", defaultValue: "1", options: [0:"Disabled (returns to Off)",1: "Enabled (returns to last state)"])
+        
+		input(name: "attr17", type: "enum", title: "(17)Function of 3-way switch", defaultValue: "0", options: [0: "Disabled",1: "Enabled"])
+        input title: "", description: "provides the option to double key no. 1. The Dimmer may control two bi-stable push-buttons or an infinite number of mono-stable push-buttons. default value 0", displayDuringSetup: false, type: "paragraph", element: "paragraph"
+
+		input(name: "attr18", type: "enum", title: "(18)Synchronize Light level for associated devices", defaultValue: "0", options: [0: "Disabled",1: "Enabled"])
+        
+		input(name: "attr19", type: "enum", title: "(19)Bi-Stable key function", defaultValue: "0", options: [0:"Toggle",1: "ON is ON, OFF is OFF"])
+        
+        input title: "ADVANCED FUNCTION", displayDuringSetup: false, type: "paragraph", element: "paragraph"
+		input(name: "attr20", type: "number", title: "(20)Impulse Length", defaultValue: "110", range: "100..170")
+        input title: "", description: "default value 101 for 60Hz or 110 for 50Hz", displayDuringSetup: false, type: "paragraph", element: "paragraph"
+		input title: "", description: "This function will enable decreasing the minimum level of the Dimmer by extending the control impulse. By changing the minimum level, the user may completely dim LED bulbs. Not all LED bulbs available on the market have the dimming option., displayDuringSetup: false, type: "paragraph", element: "paragraph"
+		input title: "WARNING!", displayDuringSetup: false, type: "paragraph", element: "paragraph"
+		input title: "", description: "Wrong setting of the function may cause incorrect operation of the Dimmer.", displayDuringSetup: false, type: "paragraph", element: "paragraph"
+
+        
+}
 metadata {
 	definition (name: "Fibaro Dimmer 211 params UK", namespace: "inpier", author: "inpier") {
 		capability "Actuator"
@@ -77,50 +120,29 @@ metadata {
 		details(["switch","configure"])
 	}
 }
-/*
-****************************************************************************************************************
-**************                                  INSTRUCTIONS                                      **************
-****************************************************************************************************************
-**************  Change the Parameter configurationValue[] in the code below to  the value         **************
-**************  you want.(Refer to manual for defaults and valid values). Then Save your changes  ************** 
-**************  and Publish For Me. Then open SmartThings App and select your device.             ************** 
-**************  Click Gear Wheel top right(Android app) & Edit Device then click Done. This triggers  **************
-**************  the Update. If you want to confirm  the parameter change then monitor             **************
-**************  Live Logging on developers web site and click Configure in the SmarthThings App.  **************
-*************   this will give you a report of each of the device's parameters and its current    **************
-*************   value and size.                                                                   **************
-*************   Once you have changed the parameter you can switch back to your original Device   **************
-*************   type if you prefer as the parameter change is retained in the 211 device.         ************** 
-*************   I've only listed some parameter below there are others. Just add them if you wish ************** 
-*************              Not elegant coding I know but at least it seems to work.               ************** 
-*/
+
 def updated() {
 	return response([
 			delayBetween([
-        zwave.configurationV1.configurationSet(configurationValue: [255], parameterNumber: 1, size: 1).format(),
-        zwave.configurationV1.configurationSet(configurationValue: [0], parameterNumber: 6, size: 1).format(),
-        zwave.configurationV1.configurationSet(configurationValue: [1], parameterNumber: 7, size: 1).format(),
-        zwave.configurationV1.configurationSet(configurationValue: [1], parameterNumber: 8, size: 1).format(),
-        zwave.configurationV1.configurationSet(configurationValue: [5], parameterNumber: 9, size: 1).format(),
-        zwave.configurationV1.configurationSet(configurationValue: [1], parameterNumber: 10, size: 1).format(),
-        zwave.configurationV1.configurationSet(configurationValue: [1], parameterNumber: 11, size: 1).format(),
-        zwave.configurationV1.configurationSet(configurationValue: [99], parameterNumber: 12, size: 1).format(),
-        zwave.configurationV1.configurationSet(configurationValue: [2], parameterNumber: 13, size: 1).format(),
-        zwave.configurationV1.configurationSet(configurationValue: [0], parameterNumber: 14, size: 1).format(),
-        zwave.configurationV1.configurationSet(configurationValue: [1], parameterNumber: 15, size: 1).format(),
-        zwave.configurationV1.configurationSet(configurationValue: [1], parameterNumber: 16, size: 1).format(),
-        zwave.configurationV1.configurationSet(configurationValue: [0], parameterNumber: 17, size: 1).format(),
-		zwave.configurationV1.configurationSet(configurationValue: [0], parameterNumber: 18, size: 1).format(),
-        zwave.configurationV1.configurationSet(configurationValue: [0], parameterNumber: 19, size: 1).format(),
-        zwave.configurationV1.configurationSet(configurationValue: [110], parameterNumber: 20, size: 1).format()
+        zwave.configurationV1.configurationSet(configurationValue: [attr1], parameterNumber: 1, size: 1).format(),
+        zwave.configurationV1.configurationSet(configurationValue: [attr6], parameterNumber: 6, size: 1).format(),
+        zwave.configurationV1.configurationSet(configurationValue: [attr7], parameterNumber: 7, size: 1).format(),
+        zwave.configurationV1.configurationSet(configurationValue: [attr8], parameterNumber: 8, size: 1).format(),
+        zwave.configurationV1.configurationSet(configurationValue: [attr9], parameterNumber: 9, size: 1).format(),
+        zwave.configurationV1.configurationSet(configurationValue: [attr10], parameterNumber: 10, size: 1).format(),
+        zwave.configurationV1.configurationSet(configurationValue: [attr11], parameterNumber: 11, size: 1).format(),
+        zwave.configurationV1.configurationSet(configurationValue: [attr12], parameterNumber: 12, size: 1).format(),
+        zwave.configurationV1.configurationSet(configurationValue: [attr13], parameterNumber: 13, size: 1).format(),
+        zwave.configurationV1.configurationSet(configurationValue: [attr14], parameterNumber: 14, size: 1).format(),
+        zwave.configurationV1.configurationSet(configurationValue: [attr15], parameterNumber: 15, size: 1).format(),
+        zwave.configurationV1.configurationSet(configurationValue: [attr16], parameterNumber: 16, size: 1).format(),
+        zwave.configurationV1.configurationSet(configurationValue: [attr17], parameterNumber: 17, size: 1).format(),
+	zwave.configurationV1.configurationSet(configurationValue: [attr18], parameterNumber: 18, size: 1).format(),
+        zwave.configurationV1.configurationSet(configurationValue: [attr19], parameterNumber: 19, size: 1).format(),
+        zwave.configurationV1.configurationSet(configurationValue: [attr20], parameterNumber: 20, size: 1).format()
 ], 1000)
 		])
 }
-//****************************************************************************************************************
-//****************************************************************************************************************
-//****************************************************************************************************************
-//****************************************************************************************************************
-
 
 
 def parse(String description) {
@@ -259,5 +281,3 @@ def configure() {
 	log.debug "Reading Device Parameters  of ${device.displayName}..."
     listCurrentParams();
 }
- 
- 
